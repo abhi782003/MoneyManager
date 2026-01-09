@@ -3,55 +3,49 @@ package in.abhijeet.moneymanager.entity;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Entity
 @Data
-@Table(name = "tbl_profiles")
-public class ProfileEntity {
+@Table(name = "tbl_categories")
+public class CategoryEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String fullName;
-	@Column(unique = true)
-	private String email;
-	private String password;
-	private String profileImageUrl;
+	
+	private String name;
+	
 	@Column(updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
+	
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	private Boolean isActive;
-	private String activationToken;
 	
+	private String type;
+	private String icon;
 	
-//not to store null value in database it executes this code and store false we will use activationlink to verify isactive true
-
-	@PrePersist
-	public void prePersist() {
-		if(this.isActive==null)
-		{
-			isActive=false;
-			
-		}
-	}
-
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "profile_id", nullable = false)
+	private ProfileEntity profile;
+	
 }
