@@ -33,5 +33,5 @@ build/
 .vscode/
 
 # Spring Boot secret configs
-src/main/resources/application.properties
+
 
