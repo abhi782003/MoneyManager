@@ -23,7 +23,7 @@ public class EmailService {
         Map<String, Object> requestBody = new HashMap<>();
         Map<String, String> sender = new HashMap<>();
         sender.put("name", "Money Manager");
-        sender.put("email", "tapsaleabhijeet@gmail.com"); // verified sender in Brevo
+        sender.put("email", "no-reply@mailin.fr"); // verified sender in Brevo
         requestBody.put("sender", sender);
 
         Map<String, String> to = new HashMap<>();
