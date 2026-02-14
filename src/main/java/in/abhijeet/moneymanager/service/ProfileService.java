@@ -107,6 +107,7 @@ public class ProfileService {
                 .build();
     }
 
+    //Authenticates user credentials and generates JWT token for session management
     public Map<String, Object> authenticateAndGenerateToken(AuthDTO authDTO) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDTO.getEmail(), authDTO.getPassword()));
